@@ -1,16 +1,31 @@
 import ldtp, ooldtp
+from ldtp import *
+from ooldtp import *
 from time import sleep
-ldtp.launchapp('gedit')
+from subprocess import call
+from subprocess import os
 
-#frm = ooldtp.context('*gedit')
+#os.system("xterm -hold -e './travis_qmake_gcc_cpp98_ldtp' &")
+
+print 'Opening application'
+
+stream = os.popen("xterm -hold -e './travis_qmake_gcc_cpp98_ldtp' &")
+
+print 'Obtaining frm'
+
+#frm = ooldtp.context('travis_qmake_gcc*')
+#print 'Wait for GUI to exists'
 #frm.waittillguiexist()
-#txt_field = frm.getchild('txt1')
-#txt_field.enterstring('Hello world!<return>bye<return>')
-#ldtp.imagecapture('*gedit', '/tmp/foo.png')
-#mnu_quit = frm.getchild('mnuQuit')
-#mnu_quit.selectmenuitem()
-#alert = ooldtp.context('Question')
-#alert.waittillguiexist()
-#btn = alert.getchild('btnClosewithoutSaving')
-#btn.click()
-#frm.waittillguinotexist()
+sleep(1)
+
+print 'Enter text'
+
+enterstring('travis_qmake_gcc*', 'Hello world<enter>', 'Go!')
+enterstring('travis_qmake_gcc*', 'Hello world<enter>')
+enterstring('Hello world<enter>')
+pastetext('Hello world<enter>')
+
+print 'Break'
+generatekeyevent('<ctrl>C')
+
+print 'Done'
